@@ -12,7 +12,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.entalpiya.app"
+        applicationId "com.vtodo.app"
         minSdk 23
         targetSdk 33
         versionCode 1
