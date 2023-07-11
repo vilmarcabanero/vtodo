@@ -1,0 +1,46 @@
+Existing Features from Philipp
+
+TODO
+EF1
+As a user, I can see the empty main screen with floating action button at the bottom right.
+- initially when there are no todos, main screen is empty. just the floating action.
+- when there are todos available, the main screen will now contain the list of todos which is for EF2
+
+TODO
+EF2
+As a user, I can see the main screen with list of todos I make
+
+TODO
+EF3
+As a user, when I click the + floating action button, I will be redirected to CreateEditTodo screen
+
+TODO
+EF4
+As a user, when I am in the CreateEditTodo screen with empty fields, I can type the title (required) and description (optional) of todo_
+and when I click the check floating action at the bottom right,
+I want a new todo_ to be created, and I will be redirected to the main screen
+and the todo_ I created will be displayed in the main screen (refer to EF2 to display the todos)
+
+TODO
+EF5 (new feature)
+As a user, when I am in the main screen and there is at least one todo_,
+when I touch the check box at the right, the todo_ will be toggled as complete, and the title and description will be underlined
+
+TODO
+EF6
+As a user, when I click the delete icon, the todo_ will be deleted,
+and a snack bar will appear,
+and if I click the undo text, the todo_ will be restored,
+and if I don't click the undo text, the todo_ will be deleted permanently.
+
+New Features
+TODO
+F1
+As a user, when I click the todo_, I will be redirected to CreateEditTodo screen and the title and description text fields will be
+populated by the todo_'s existing title and description.
+
+TODO
+F2
+As a user, when I am in CreateEditTodo screen, and when I edit the text fields, and when I click the check floating icon button,
+the todo_ will be saved and the new todo_ details will reflect to the list of todos in main screen.
+and I will be redirected back to the main screen.

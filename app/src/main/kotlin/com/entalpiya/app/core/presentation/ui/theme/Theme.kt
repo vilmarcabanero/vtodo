@@ -12,9 +12,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 
-private val DarkColorPalette = darkColors(primary = Purple200, primaryVariant = Purple700, secondary = Teal200)
+private val DarkColorPalette = darkColors(primary = BluePrimary, primaryVariant = Purple700, secondary = Teal200)
 
-private val LightColorPalette = lightColors(primary = Purple500, primaryVariant = Purple700, secondary = Teal200
+private val LightColorPalette = lightColors(primary = BluePrimary, primaryVariant = Purple700, secondary = Teal200
 
     /* Other default colors to override
     background = Color.White,
