@@ -1,6 +1,5 @@
-package com.entalpiya.app.index.presentation
+package com.entalpiya.app.index.presentation.todo_list
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -12,11 +11,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class IndexViewModel @Inject constructor(
+class TodoListViewModel @Inject constructor(
     private val useCases: TodoUseCases
 ) : ViewModel() {
-    private val _state = mutableStateOf(IndexState())
-    val state: State<IndexState> = _state
+    private val _state = mutableStateOf(TodoListState())
+    val state: State<TodoListState> = _state
 
     init {
         getAndSetAllTodos()

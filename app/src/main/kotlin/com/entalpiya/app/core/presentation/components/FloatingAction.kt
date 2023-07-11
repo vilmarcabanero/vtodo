@@ -1,4 +1,4 @@
-package com.entalpiya.app.index.presentation.components
+package com.entalpiya.app.core.presentation.components
 
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -7,19 +7,18 @@ import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun FloatingAction(
-    navigateTo: () -> Unit,
+    onClick: () -> Unit,
     icon: ImageVector,
     desc: String,
 ) {
     FloatingActionButton(
         onClick = {
-            navigateTo()
+            onClick()
         },
         backgroundColor = MaterialTheme.colors.primary
     ) {
@@ -31,6 +30,6 @@ fun FloatingAction(
 @Composable
 fun FloatingActionPreview() {
     Surface {
-        FloatingAction(navigateTo = {}, icon = Icons.Default.Add, desc = "add")
+        FloatingAction(onClick = {}, icon = Icons.Default.Add, desc = "add")
     }
 }

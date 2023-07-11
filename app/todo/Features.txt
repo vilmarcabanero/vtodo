@@ -1,32 +1,32 @@
 Existing Features from Philipp
 
-TODO
+done TODO
 EF1
 As a user, I can see the empty main screen with floating action button at the bottom right.
 - initially when there are no todos, main screen is empty. just the floating action.
 - when there are todos available, the main screen will now contain the list of todos which is for EF2
 
-TODO
+done TODO
 EF2
 As a user, I can see the main screen with list of todos I make
 
-TODO
+done TODO
 EF3
 As a user, when I click the + floating action button, I will be redirected to CreateEditTodo screen
 
-TODO
+done TODO
 EF4
 As a user, when I am in the CreateEditTodo screen with empty fields, I can type the title (required) and description (optional) of todo_
 and when I click the check floating action at the bottom right,
 I want a new todo_ to be created, and I will be redirected to the main screen
 and the todo_ I created will be displayed in the main screen (refer to EF2 to display the todos)
 
-TODO
+done TODO
 EF5 (new feature)
 As a user, when I am in the main screen and there is at least one todo_,
 when I touch the check box at the right, the todo_ will be toggled as complete, and the title and description will be underlined
 
-TODO
+done TODO
 EF6
 As a user, when I click the delete icon, the todo_ will be deleted,
 and a snack bar will appear,
