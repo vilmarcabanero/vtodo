@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,9 +28,16 @@ import java.util.UUID
 @Composable
 fun AddEditTodoScreen(
     navigator: DestinationsNavigator,
-    vm: AddEditTodoViewModel = hiltViewModel()
+    vm: AddEditTodoViewModel = hiltViewModel(),
+    todo: Todo?
 ) {
     val scaffoldState = rememberScaffoldState()
+    LaunchedEffect(key1 = true) {
+        todo?.let {
+            vm.setTitle(it.title)
+            vm.setDescription(it.description ?: "")
+        }
+    }
     Scaffold(
         floatingActionButton = {
             FloatingAction(
@@ -37,7 +45,7 @@ fun AddEditTodoScreen(
                     if (vm.addTodoSuccess.value) {
                         vm.insertTodo(
                             Todo(
-                                id = UUID.randomUUID().toString(),
+                                id = todo?.id ?: UUID.randomUUID().toString(),
                                 title = vm.titleState.value,
                                 description = vm.descriptionState.value,
                                 isComplete = false

@@ -7,6 +7,17 @@ plugins {
     id 'com.google.devtools.ksp'
 }
 
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
+}
+
 android {
     namespace "com.entalpiya.app"
     compileSdk 33

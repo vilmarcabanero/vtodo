@@ -34,13 +34,33 @@ and if I click the undo text, the todo_ will be restored,
 and if I don't click the undo text, the todo_ will be deleted permanently.
 
 New Features
-TODO
+done TODO
 F1
 As a user, when I click the todo_, I will be redirected to CreateEditTodo screen and the title and description text fields will be
 populated by the todo_'s existing title and description.
 
-TODO
+done TODO
 F2
 As a user, when I am in CreateEditTodo screen, and when I edit the text fields, and when I click the check floating icon button,
 the todo_ will be saved and the new todo_ details will reflect to the list of todos in main screen.
 and I will be redirected back to the main screen.
+
+TODO
+F3
+As a user, I want to have an online account.
+So that when I user another device, my data will be backed up.
+So that when I use more than one device, my data will be synced with all my devices.
+- try, when app first loads, check if user is online. If he is, compare the data between remote and local, use versionKey as reference,
+if versionKeys are different, it means that the data was updated. Compare each item, if one exists remotely, insert it in local.
+If one exists locally, insert it in remote db.
+
+TODO
+F4
+As a user, I want that my details be saved locally after I login, so that when I open the app even offline,
+my details e.g. first name, email, etc. is visible on the app.
+- save the user details in user table similar to user table in the backend.
+and retrieve the user details thru query SELECT * FROM user WHERE id = :id
+
+TODO
+F5
+As a developer, I want the to make the focus state of title textfield to true when I navigate to AddEditTodoScreen.

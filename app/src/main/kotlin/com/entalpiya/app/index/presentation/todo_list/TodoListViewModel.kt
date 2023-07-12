@@ -48,4 +48,9 @@ class TodoListViewModel @Inject constructor(
             getAndSetAllTodos()
         }
     }
+
+    fun handleGetTodo(id: String) {
+        val foundTodo = state.value.todos.find { it.id == id }
+        _state.value = _state.value.copy(selectedTodo = foundTodo)
+    }
 }

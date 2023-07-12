@@ -15,8 +15,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.app.index.domain.model.Todo
-import com.entalpiya.app.index.presentation.destinations.AddEditTodoScreenDestination
 import com.entalpiya.app.core.presentation.components.FloatingAction
+import com.entalpiya.app.index.presentation.destinations.AddEditTodoScreenDestination
 import com.entalpiya.app.index.presentation.todo_list.components.TodoItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -24,13 +24,15 @@ import kotlinx.coroutines.launch
 
 @Destination(start = true)
 @Composable
-fun TodoListScreen(navigator: DestinationsNavigator ,vm: TodoListViewModel = hiltViewModel()) {
+fun TodoListScreen(navigator: DestinationsNavigator, vm: TodoListViewModel = hiltViewModel()) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
     Scaffold(
         floatingActionButton = {
             FloatingAction(
-                onClick = { navigator.navigate(AddEditTodoScreenDestination()) },
+                onClick = {
+                    navigator.navigate(AddEditTodoScreenDestination(null))
+                },
                 icon = Icons.Default.Add,
                 desc = "add"
             )
@@ -66,6 +68,12 @@ fun TodoListScreen(navigator: DestinationsNavigator ,vm: TodoListViewModel = hil
                                     vm.restoreTodo(todo)
                                 }
                             }
+                        },
+                        handleGetTodo = {
+                            vm.handleGetTodo(todo.id)
+                        },
+                        navigateToAddEditTodoScreen = {
+                            navigator.navigate(AddEditTodoScreenDestination(vm.state.value.selectedTodo))
                         }
                     )
                 }
