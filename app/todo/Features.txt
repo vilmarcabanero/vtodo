@@ -61,6 +61,32 @@ my details e.g. first name, email, etc. is visible on the app.
 - save the user details in user table similar to user table in the backend.
 and retrieve the user details thru query SELECT * FROM user WHERE id = :id
 
-TODO
+done TODO
 F5
 As a developer, I want the to make the focus state of title textfield to true when I navigate to AddEditTodoScreen.
+
+done TODO
+F6
+As a developer, I want to remove the delete icon from the todo_ list, and move it to the AddEditTodoScreen instead.
+- at the top right of the screen, have a vertical more icon, then a pop up will appear with a menu item of "Delete"
+- which is when clicked, the todo_ will be deleted and the user will be redirected to the TodoListScreen.
+
+TODO
+F7
+As a developer, I want to maintain the order of todos before and after I delete a todo_
+- current behaviour is that the new todo_ will always be put at the last of the list
+- possible solution, add a createdAt field, and then always arrange the todo_ by date, from latest to oldest.
+
+done TODO
+F8
+As a developer, I want to remove the extra space for description when description is null or empty.
+- current behaviour is that the description always contains vertical space.
+
+TODO
+F9
+As a developer, I want to maintain the two lines for description in TodoListScreen, with ellipsis.
+
+TODO
+F10
+As a developer, I want the id as the screen path params instead of the whole todo_ when a todo_ is clicked
+- current implementation is that the todo_ is hinahanap muna ang todo_ then buong todo_ ang pinapasa as param.

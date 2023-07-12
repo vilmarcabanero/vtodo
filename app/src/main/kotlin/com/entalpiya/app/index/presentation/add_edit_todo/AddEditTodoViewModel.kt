@@ -14,22 +14,35 @@ import javax.inject.Inject
 class AddEditTodoViewModel @Inject constructor(
     private val useCases: TodoUseCases
 ) : ViewModel() {
+
+    private val _state = mutableStateOf(AddEditTodoState())
+    val state: State<AddEditTodoState> = _state
+
+
     private val _titleState = mutableStateOf("")
     val titleState: State<String> = _titleState
 
     private val _descriptionState = mutableStateOf("")
     val descriptionState: State<String> = _descriptionState
 
-    private val _addTodoSuccess = mutableStateOf(false)
-    val addTodoSuccess: State<Boolean> = _addTodoSuccess
 
     fun setTitle(value: String) {
         _titleState.value = value
-        _addTodoSuccess.value = value.isNotBlank()
+        _state.value = _state.value.copy(addTodoSuccess = value.isNotBlank())
     }
 
     fun setDescription(value: String) {
         _descriptionState.value = value
+    }
+
+
+
+    fun setToggleOpenPopup() {
+        _state.value = _state.value.copy(isPopUpOpen = !_state.value.isPopUpOpen)
+    }
+
+    fun setClosePopup() {
+        _state.value = _state.value.copy(isPopUpOpen = false)
     }
 
     fun insertTodo(todo: Todo) {

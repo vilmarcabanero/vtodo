@@ -1,20 +1,30 @@
 package com.entalpiya.app.index.presentation.add_edit_todo
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.SnackbarResult
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -23,8 +33,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.app.core.presentation.components.FloatingAction
 import com.entalpiya.app.index.domain.model.Todo
 import com.entalpiya.app.index.presentation.destinations.TodoListScreenDestination
+import com.entalpiya.app.index.presentation.todo_list.TodoListViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 @Destination
@@ -32,6 +44,7 @@ import java.util.UUID
 fun AddEditTodoScreen(
     navigator: DestinationsNavigator,
     vm: AddEditTodoViewModel = hiltViewModel(),
+    todoListVm: TodoListViewModel = hiltViewModel(),
     todo: Todo?
 ) {
     val scaffoldState = rememberScaffoldState()
@@ -45,10 +58,35 @@ fun AddEditTodoScreen(
         }
     }
     Scaffold(
+        topBar = {
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                todo?.let {
+                    IconButton(onClick = { vm.setToggleOpenPopup() }) {
+                        Icon(imageVector = Icons.Default.MoreVert, contentDescription = "more")
+                        DropdownMenu(
+                            expanded = vm.state.value.isPopUpOpen,
+                            onDismissRequest = { vm.setClosePopup() }
+                        ) {
+                            DropdownMenuItem(onClick = {
+                                todoListVm.handleDeleteTodo(todo!!.id)
+                                navigator.navigate(
+                                    TodoListScreenDestination(
+                                        hasDeleteAction = true,
+                                        todo = todo
+                                    )
+                                )
+                            }) {
+                                Text("Delete")
+                            }
+                        }
+                    }
+                }
+            }
+        },
         floatingActionButton = {
             FloatingAction(
                 onClick = {
-                    if (vm.addTodoSuccess.value) {
+                    if (vm.state.value.addTodoSuccess) {
                         vm.insertTodo(
                             Todo(
                                 id = todo?.id ?: UUID.randomUUID().toString(),
@@ -57,7 +95,12 @@ fun AddEditTodoScreen(
                                 isComplete = false
                             )
                         )
-                        navigator.navigate(TodoListScreenDestination())
+                        navigator.navigate(
+                            TodoListScreenDestination(
+                                hasDeleteAction = null,
+                                todo = null
+                            )
+                        )
                     }
                 },
                 icon = Icons.Default.Check,
