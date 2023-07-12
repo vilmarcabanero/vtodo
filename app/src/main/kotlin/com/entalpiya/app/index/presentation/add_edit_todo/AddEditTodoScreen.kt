@@ -14,7 +14,10 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.app.core.presentation.components.FloatingAction
@@ -32,10 +35,13 @@ fun AddEditTodoScreen(
     todo: Todo?
 ) {
     val scaffoldState = rememberScaffoldState()
+    val focusRequester = remember { FocusRequester() }
     LaunchedEffect(key1 = true) {
-        todo?.let {
-            vm.setTitle(it.title)
-            vm.setDescription(it.description ?: "")
+        if (todo == null) {
+            focusRequester.requestFocus()
+        } else {
+            vm.setTitle(todo.title)
+            vm.setDescription(todo.description ?: "")
         }
     }
     Scaffold(
@@ -75,7 +81,9 @@ fun AddEditTodoScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
-            )
+                    .focusRequester(focusRequester),
+
+                )
             TextField(
                 value = vm.descriptionState.value,
                 onValueChange = { desc -> vm.setDescription(desc) },
