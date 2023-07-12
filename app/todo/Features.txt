@@ -82,11 +82,17 @@ F8
 As a developer, I want to remove the extra space for description when description is null or empty.
 - current behaviour is that the description always contains vertical space.
 
-TODO
+done TODO
 F9
 As a developer, I want to maintain the two lines for description in TodoListScreen, with ellipsis.
 
-TODO
+done TODO
 F10
 As a developer, I want the id as the screen path params instead of the whole todo_ when a todo_ is clicked
 - current implementation is that the todo_ is hinahanap muna ang todo_ then buong todo_ ang pinapasa as param.
+- fixed the performance issue. buong todo_ parin pinapasa pero hindi na nagkakaroon ng search task. may copy na pala ng todo_.
+
+done TODO
+B1
+When I delete a todo_, and undo it, snack bar will always appear everytime I go back to the TodoListScreen.
+- fixed using SharedPreferences

@@ -1,5 +1,7 @@
 package com.entalpiya.app.index.presentation.todo_list
 
+import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.app.index.domain.model.Todo
 import com.entalpiya.app.core.presentation.components.FloatingAction
+import com.entalpiya.app.index.presentation.add_edit_todo.AddEditTodoViewModel
 import com.entalpiya.app.index.presentation.destinations.AddEditTodoScreenDestination
 import com.entalpiya.app.index.presentation.todo_list.components.TodoItem
 import com.ramcosta.composedestinations.annotation.Destination
@@ -34,14 +37,12 @@ import kotlinx.coroutines.launch
 fun TodoListScreen(
     navigator: DestinationsNavigator,
     vm: TodoListViewModel = hiltViewModel(),
-    hasDeleteAction: Boolean?,
-    todo: Todo?
+    todo: Todo? = null,
 ) {
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-
-    LaunchedEffect(key1 = true) {
-        if (hasDeleteAction == true && todo != null) {
+    LaunchedEffect(Unit) {
+        if (vm.state.value.hasDeleteAction && todo != null) {
             scope.launch {
                 val result = scaffoldState.snackbarHostState.showSnackbar(
                     message = "Todo deleted",
@@ -50,6 +51,10 @@ fun TodoListScreen(
                 if (result == SnackbarResult.ActionPerformed) {
                     vm.restoreTodo(todo)
                 }
+
+                vm.deleteHasDeleteAction()
+
+//                Log.d("TodoListScreen", "In LaunchedEffect hasDeleteAction is $hasDeleteAction")
             }
         }
     }
@@ -86,11 +91,8 @@ fun TodoListScreen(
                                 !todo.isComplete
                             )
                         },
-                        handleGetTodo = {
-                            vm.handleGetTodo(todo.id)
-                        },
                         navigateToAddEditTodoScreen = {
-                            navigator.navigate(AddEditTodoScreenDestination(vm.state.value.selectedTodo))
+                            navigator.navigate(AddEditTodoScreenDestination(todo))
                         }
                     )
                 }

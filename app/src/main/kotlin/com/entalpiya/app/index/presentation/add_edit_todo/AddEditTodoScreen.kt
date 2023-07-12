@@ -1,5 +1,6 @@
 package com.entalpiya.app.index.presentation.add_edit_todo
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -49,7 +50,7 @@ fun AddEditTodoScreen(
 ) {
     val scaffoldState = rememberScaffoldState()
     val focusRequester = remember { FocusRequester() }
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(Unit) {
         if (todo == null) {
             focusRequester.requestFocus()
         } else {
@@ -68,13 +69,14 @@ fun AddEditTodoScreen(
                             onDismissRequest = { vm.setClosePopup() }
                         ) {
                             DropdownMenuItem(onClick = {
-                                todoListVm.handleDeleteTodo(todo!!.id)
+                                todoListVm.handleDeleteTodo(todo.id)
+                                vm.setHasDeleteAction(true)
                                 navigator.navigate(
                                     TodoListScreenDestination(
-                                        hasDeleteAction = true,
                                         todo = todo
                                     )
                                 )
+                                vm.saveHasDeleteAction()
                             }) {
                                 Text("Delete")
                             }
@@ -97,7 +99,6 @@ fun AddEditTodoScreen(
                         )
                         navigator.navigate(
                             TodoListScreenDestination(
-                                hasDeleteAction = null,
                                 todo = null
                             )
                         )

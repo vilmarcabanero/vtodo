@@ -4,5 +4,5 @@ import com.entalpiya.app.index.domain.model.Todo
 
 data class TodoListState(
     val todos: List<Todo> = emptyList(),
-    val selectedTodo: Todo? = null,
+    val hasDeleteAction: Boolean = false,
 )

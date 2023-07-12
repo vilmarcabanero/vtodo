@@ -5,4 +5,8 @@ data class TodoUseCases(
     val insertTodo: InsertTodo,
     val deleteTodo: DeleteTodo,
     val toggleCompleteTodo: ToggleCompleteTodo,
+    val getTodo: GetTodo,
+    val getHasDeleteAction: GetHasDeleteAction,
+    val saveHasDeleteAction: SaveHasDeleteAction,
+    val deleteHasDeleteAction: DeleteHasDeleteAction,
 )

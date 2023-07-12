@@ -16,6 +16,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.delay
 
 @Composable
 fun TodoItem(
@@ -34,20 +36,20 @@ fun TodoItem(
     description: String?,
     isComplete: Boolean,
     handleToggleIsComplete: () -> Unit,
-    handleGetTodo: (id: String) -> Unit,
     navigateToAddEditTodoScreen: () -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                handleGetTodo(id)
                 navigateToAddEditTodoScreen()
             },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Column(
-            modifier = Modifier.weight(10f).padding(10.dp)
+            modifier = Modifier
+                .weight(10f)
+                .padding(10.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

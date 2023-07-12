@@ -1,5 +1,6 @@
 package com.entalpiya.app.index.presentation.todo_list
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,11 @@ class TodoListViewModel @Inject constructor(
 
     init {
         getAndSetAllTodos()
+        getAndSetHasDeleteAction()
+    }
+
+    private fun setHasDeleteAction(value: Boolean) {
+        _state.value = _state.value.copy(hasDeleteAction = value)
     }
 
     private fun getAndSetAllTodos() {
@@ -49,8 +55,21 @@ class TodoListViewModel @Inject constructor(
         }
     }
 
-    fun handleGetTodo(id: String) {
-        val foundTodo = state.value.todos.find { it.id == id }
-        _state.value = _state.value.copy(selectedTodo = foundTodo)
+    private fun getAndSetHasDeleteAction() {
+        viewModelScope.launch {
+            val hasDeleteAction = useCases.getHasDeleteAction() == "true"
+            setHasDeleteAction(hasDeleteAction)
+            Log.d(
+                "TodoListViewModel",
+                "getAndSetHasDeleteAction() hasDeleteAction is $hasDeleteAction"
+            )
+        }
+    }
+
+    fun deleteHasDeleteAction() {
+        viewModelScope.launch {
+            useCases.deleteHasDeleteAction()
+            setHasDeleteAction(false)
+        }
     }
 }

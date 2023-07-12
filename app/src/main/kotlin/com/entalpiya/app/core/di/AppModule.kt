@@ -1,6 +1,8 @@
 package com.entalpiya.app.core.di
 
+import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.entalpiya.app.core.data.local.AppDatabase
 import dagger.Module
@@ -21,5 +23,11 @@ object AppModule {
         return Room.databaseBuilder(appContext, AppDatabase::class.java, AppDatabase.DATABASE_NAME)
             .fallbackToDestructiveMigration()
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPref(app: Application): SharedPreferences {
+        return app.getSharedPreferences("prefs", Context.MODE_PRIVATE)
     }
 }

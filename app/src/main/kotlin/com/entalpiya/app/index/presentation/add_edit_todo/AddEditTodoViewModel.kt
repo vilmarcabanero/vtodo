@@ -1,5 +1,6 @@
 package com.entalpiya.app.index.presentation.add_edit_todo
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -35,7 +36,9 @@ class AddEditTodoViewModel @Inject constructor(
         _descriptionState.value = value
     }
 
-
+    fun setHasDeleteAction(value: Boolean) {
+        _state.value = _state.value.copy(hasDeleteAction = value)
+    }
 
     fun setToggleOpenPopup() {
         _state.value = _state.value.copy(isPopUpOpen = !_state.value.isPopUpOpen)
@@ -48,6 +51,12 @@ class AddEditTodoViewModel @Inject constructor(
     fun insertTodo(todo: Todo) {
         viewModelScope.launch {
             useCases.insertTodo(todo)
+        }
+    }
+
+    fun saveHasDeleteAction() {
+        viewModelScope.launch {
+            useCases.saveHasDeleteAction()
         }
     }
 }

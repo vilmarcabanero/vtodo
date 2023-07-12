@@ -20,4 +20,7 @@ interface TodoDao {
 
     @Query("UPDATE todo SET isComplete = :isComplete WHERE id = :id")
     suspend fun toggleCompleteTodo(id: String, isComplete: Boolean)
+
+    @Query("SELECT * FROM todo WHERE id = :id")
+    suspend fun getTodoById(id: String): TodoEntity?
 }
