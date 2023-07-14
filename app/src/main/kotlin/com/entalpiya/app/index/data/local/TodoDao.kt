@@ -5,7 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.entalpiya.app.core.data.local.model.TodoEntity
+import com.entalpiya.app.index.data.local.model.TodoEntity
 
 @Dao
 interface TodoDao {

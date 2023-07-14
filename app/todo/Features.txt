@@ -71,7 +71,7 @@ As a developer, I want to remove the delete icon from the todo_ list, and move i
 - at the top right of the screen, have a vertical more icon, then a pop up will appear with a menu item of "Delete"
 - which is when clicked, the todo_ will be deleted and the user will be redirected to the TodoListScreen.
 
-TODO
+done TODO
 F7
 As a developer, I want to maintain the order of todos before and after I edit and delete a todo_
 - current behaviour is that the new todo_ will always be put at the last of the list
@@ -125,7 +125,7 @@ B1
 When I delete a todo_, and undo it, snack bar will always appear everytime I go back to the TodoListScreen.
 - fixed using SharedPreferences
 
-TODO
+done TODO
 B2
 When I click a complete todo_, then press check to save even if without editing, the isComplete status becomes false.
 - the correct behaviour should remain the isComplete status of the todo_.

@@ -1,4 +1,4 @@
-package com.entalpiya.app.core.data.local.model
+package com.entalpiya.app.index.data.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,7 +10,8 @@ data class TodoEntity(
     val id: String,
     val title: String,
     val description: String?,
-    val isComplete: Boolean
+    val isComplete: Boolean,
+    val createdAt: Long,
 ) {
-    fun toTodo() = Todo(id, title, description, isComplete)
+    fun toTodo() = Todo(id, title, description, isComplete, createdAt)
 }

@@ -94,7 +94,8 @@ fun AddEditTodoScreen(
                                 id = todo?.id ?: UUID.randomUUID().toString(),
                                 title = vm.titleState.value,
                                 description = vm.descriptionState.value,
-                                isComplete = todo?.isComplete ?: false
+                                isComplete = todo?.isComplete ?: false,
+                                createdAt = todo?.createdAt ?: System.currentTimeMillis(),
                             )
                         )
                         navigator.navigate(

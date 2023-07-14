@@ -8,6 +8,6 @@ class GetAllTodos @Inject constructor(
     private val repository: TodoRepository
 ) {
     suspend operator fun invoke(): List<Todo> {
-        return repository.getAllTodos()
+        return repository.getAllTodos().sortedBy { it.createdAt }
     }
 }

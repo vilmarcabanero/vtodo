@@ -1,7 +1,7 @@
 package com.entalpiya.app.index.data.repository
 
 import android.content.SharedPreferences
-import com.entalpiya.app.core.data.local.model.TodoEntity
+import com.entalpiya.app.index.data.local.model.TodoEntity
 import com.entalpiya.app.index.data.local.TodoDao
 import com.entalpiya.app.index.domain.model.Todo
 import com.entalpiya.app.index.domain.repository.TodoRepository
@@ -17,7 +17,7 @@ class TodoRepositoryImpl @Inject constructor(
 
     override suspend fun insertTodo(todo: Todo) {
         dao.insertTodo(
-            TodoEntity(todo.id, todo.title, todo.description, todo.isComplete)
+            TodoEntity(todo.id, todo.title, todo.description, todo.isComplete, todo.createdAt)
         )
     }
 
