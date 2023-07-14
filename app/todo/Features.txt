@@ -73,7 +73,7 @@ As a developer, I want to remove the delete icon from the todo_ list, and move i
 
 TODO
 F7
-As a developer, I want to maintain the order of todos before and after I delete a todo_
+As a developer, I want to maintain the order of todos before and after I edit and delete a todo_
 - current behaviour is that the new todo_ will always be put at the last of the list
 - possible solution, add a createdAt field, and then always arrange the todo_ by date, from latest to oldest.
 
@@ -92,7 +92,40 @@ As a developer, I want the id as the screen path params instead of the whole tod
 - current implementation is that the todo_ is hinahanap muna ang todo_ then buong todo_ ang pinapasa as param.
 - fixed the performance issue. buong todo_ parin pinapasa pero hindi na nagkakaroon ng search task. may copy na pala ng todo_.
 
+TODO
+F11
+As a developer, I want to trigger the create todo_ functionality when the return key on keyboard is clicked.
+- make the return key as check.
+
+TODO
+F11
+As a developer, I want to make CreateTodoScreen separate but not a screen but a bottom drawer
+- similar to google tasks
+
+TODO
+F12
+As a developer, I want to make this app a Daily Tasks, in which the main list is the current todos of the day
+- that is, when the day becomes tomorrow, the todos for yesterday will be moved at the bottom with Inactive (2) toggle
+- the current todos of the day is Active todos
+- similar to googles tasks "Completed (2)" where 2 is the number of completed todos, or in this app, the number of Inactive todos.
+
+TODO
+F13
+As a developer, I want the app to use BasicTextField instead of TextField
+- so that, we can avoid the default Material UI TextField that has border bottom
+- check if this looks more beautiful. If not, revert.
+
+TODO
+F14
+As a developer, I want the width of the DropdownMenu become 1/2 of the screen.
+
+
 done TODO
 B1
 When I delete a todo_, and undo it, snack bar will always appear everytime I go back to the TodoListScreen.
 - fixed using SharedPreferences
+
+TODO
+B2
+When I click a complete todo_, then press check to save even if without editing, the isComplete status becomes false.
+- the correct behaviour should remain the isComplete status of the todo_.
