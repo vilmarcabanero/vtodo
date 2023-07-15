@@ -92,10 +92,12 @@ As a developer, I want the id as the screen path params instead of the whole tod
 - current implementation is that the todo_ is hinahanap muna ang todo_ then buong todo_ ang pinapasa as param.
 - fixed the performance issue. buong todo_ parin pinapasa pero hindi na nagkakaroon ng search task. may copy na pala ng todo_.
 
-TODO
+done TODO
 F11
 As a developer, I want to trigger the create todo_ functionality when the return key on keyboard is clicked.
 - make the return key as check.
+- also programmatically hide the keyboard after return key is clicked since if di ginawa, medyo delay yung pag hide ng keyboard.
+Nauna na mapunta sa TodoListScreen tas saka lang ma hide ang keyboard.
 
 TODO
 F11
