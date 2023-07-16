@@ -117,7 +117,7 @@ As a developer, I want the app to use BasicTextField instead of TextField
 - so that, we can avoid the default Material UI TextField that has border bottom
 - check if this looks more beautiful. If not, revert.
 
-TODO
+done TODO
 F14
 As a developer, I want the width of the DropdownMenu become 1/2 of the screen.
 

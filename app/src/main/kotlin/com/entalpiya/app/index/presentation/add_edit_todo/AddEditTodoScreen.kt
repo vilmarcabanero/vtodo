@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.DropdownMenu
@@ -27,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -69,7 +71,8 @@ fun AddEditTodoScreen(
                         Icon(imageVector = Icons.Default.MoreVert, contentDescription = "more")
                         DropdownMenu(
                             expanded = vm.state.value.isPopUpOpen,
-                            onDismissRequest = { vm.setClosePopup() }
+                            onDismissRequest = { vm.setClosePopup() },
+                            modifier = Modifier.width(LocalConfiguration.current.screenWidthDp.dp / 2f)
                         ) {
                             DropdownMenuItem(onClick = {
                                 todoListVm.handleDeleteTodo(todo.id)
