@@ -2,10 +2,10 @@ package com.entalpiya.app.index.data.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.entalpiya.app.index.domain.model.Todo
+import com.entalpiya.app.index.domain.model.Task
 
-@Entity(tableName = "todo")
-data class TodoEntity(
+@Entity(tableName = "task")
+data class TaskEntity(
     @PrimaryKey
     val id: String,
     val title: String,
@@ -13,5 +13,5 @@ data class TodoEntity(
     val isComplete: Boolean,
     val createdAt: Long,
 ) {
-    fun toTodo() = Todo(id, title, description, isComplete, createdAt)
+    fun toTask() = Task(id, title, description, isComplete, createdAt)
 }

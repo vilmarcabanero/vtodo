@@ -1,4 +1,4 @@
-package com.entalpiya.app.index.presentation.add_edit_todo
+package com.entalpiya.app.index.presentation.add_edit_task
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,38 +35,38 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.app.core.presentation.components.FloatingAction
 import com.entalpiya.app.core.utils.hideSoftwareKeyboard
-import com.entalpiya.app.index.domain.model.Todo
-import com.entalpiya.app.index.presentation.destinations.TodoListScreenDestination
-import com.entalpiya.app.index.presentation.todo_list.TodoListViewModel
+import com.entalpiya.app.index.domain.model.Task
+import com.entalpiya.app.index.presentation.destinations.TaskListScreenDestination
+import com.entalpiya.app.index.presentation.task_list.TaskListViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.util.UUID
 
 @Destination
 @Composable
-fun AddEditTodoScreen(
+fun AddEditTaskScreen(
     navigator: DestinationsNavigator,
-    vm: AddEditTodoViewModel = hiltViewModel(),
-    todoListVm: TodoListViewModel = hiltViewModel(),
-    todo: Todo?
+    vm: AddEditTaskViewModel = hiltViewModel(),
+    taskListVm: TaskListViewModel = hiltViewModel(),
+    task: Task?
 ) {
     val scaffoldState = rememberScaffoldState()
     val focusRequester = remember { FocusRequester() }
     val view = LocalView.current
 
     LaunchedEffect(Unit) {
-        if (todo == null) {
+        if (task == null) {
             focusRequester.requestFocus()
         } else {
-            vm.setTitle(todo.title)
-            vm.setDescription(todo.description ?: "")
+            vm.setTitle(task.title)
+            vm.setDescription(task.description ?: "")
         }
     }
 
     Scaffold(
         topBar = {
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                todo?.let {
+                task?.let {
                     IconButton(onClick = { vm.setToggleOpenPopup() }) {
                         Icon(imageVector = Icons.Default.MoreVert, contentDescription = "more")
                         DropdownMenu(
@@ -75,11 +75,11 @@ fun AddEditTodoScreen(
                             modifier = Modifier.width(LocalConfiguration.current.screenWidthDp.dp / 2f)
                         ) {
                             DropdownMenuItem(onClick = {
-                                todoListVm.handleDeleteTodo(todo.id)
+                                taskListVm.handleDeleteTask(task.id)
                                 vm.setHasDeleteAction(true)
                                 navigator.navigate(
-                                    TodoListScreenDestination(
-                                        todo = todo
+                                    TaskListScreenDestination(
+                                        task = task
                                     )
                                 )
                                 vm.saveHasDeleteAction()
@@ -94,7 +94,7 @@ fun AddEditTodoScreen(
         floatingActionButton = {
             FloatingAction(
                 onClick = {
-                    handleAddEditTodo(vm, todo, navigator)
+                    handleAddEditTask(vm, task, navigator)
                 },
                 icon = Icons.Default.Check,
                 desc = "check"
@@ -121,7 +121,7 @@ fun AddEditTodoScreen(
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(onDone = {
                     hideSoftwareKeyboard(view)
-                    handleAddEditTodo(vm, todo, navigator)
+                    handleAddEditTask(vm, task, navigator)
                 })
                 )
 
@@ -138,27 +138,27 @@ fun AddEditTodoScreen(
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(onDone = {
                     hideSoftwareKeyboard(view)
-                    handleAddEditTodo(vm, todo, navigator)
+                    handleAddEditTask(vm, task, navigator)
                 })
             )
         }
     }
 }
 
-fun handleAddEditTodo(vm: AddEditTodoViewModel, todo: Todo?, navigator: DestinationsNavigator) {
-    if (vm.state.value.addTodoSuccess) {
-        vm.insertTodo(
-            Todo(
-                id = todo?.id ?: UUID.randomUUID().toString(),
+fun handleAddEditTask(vm: AddEditTaskViewModel, task: Task?, navigator: DestinationsNavigator) {
+    if (vm.state.value.addTaskSuccess) {
+        vm.insertTask(
+            Task(
+                id = task?.id ?: UUID.randomUUID().toString(),
                 title = vm.titleState.value,
                 description = vm.descriptionState.value,
-                isComplete = todo?.isComplete ?: false,
-                createdAt = todo?.createdAt ?: System.currentTimeMillis(),
+                isComplete = task?.isComplete ?: false,
+                createdAt = task?.createdAt ?: System.currentTimeMillis(),
             )
         )
         navigator.navigate(
-            TodoListScreenDestination(
-                todo = null
+            TaskListScreenDestination(
+                task = null
             )
         )
     }

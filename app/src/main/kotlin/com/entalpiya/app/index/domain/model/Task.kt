@@ -2,10 +2,9 @@ package com.entalpiya.app.index.domain.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.time.LocalDateTime
 
 @Parcelize
-data class Todo(
+data class Task(
     val id: String,
     val title: String,
     val description: String?,

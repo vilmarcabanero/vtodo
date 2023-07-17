@@ -1,23 +1,22 @@
-package com.entalpiya.app.index.presentation.add_edit_todo
+package com.entalpiya.app.index.presentation.add_edit_task
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.entalpiya.app.index.domain.model.Todo
-import com.entalpiya.app.index.domain.use_case.TodoUseCases
+import com.entalpiya.app.index.domain.model.Task
+import com.entalpiya.app.index.domain.use_case.TaskUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddEditTodoViewModel @Inject constructor(
-    private val useCases: TodoUseCases
+class AddEditTaskViewModel @Inject constructor(
+    private val useCases: TaskUseCases
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(AddEditTodoState())
-    val state: State<AddEditTodoState> = _state
+    private val _state = mutableStateOf(AddEditTaskState())
+    val state: State<AddEditTaskState> = _state
 
 
     private val _titleState = mutableStateOf("")
@@ -29,7 +28,7 @@ class AddEditTodoViewModel @Inject constructor(
 
     fun setTitle(value: String) {
         _titleState.value = value
-        _state.value = _state.value.copy(addTodoSuccess = value.isNotBlank())
+        _state.value = _state.value.copy(addTaskSuccess = value.isNotBlank())
     }
 
     fun setDescription(value: String) {
@@ -48,9 +47,9 @@ class AddEditTodoViewModel @Inject constructor(
         _state.value = _state.value.copy(isPopUpOpen = false)
     }
 
-    fun insertTodo(todo: Todo) {
+    fun insertTask(task: Task) {
         viewModelScope.launch {
-            useCases.insertTodo(todo)
+            useCases.insertTask(task)
         }
     }
 

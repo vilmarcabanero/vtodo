@@ -1,25 +1,25 @@
-package com.entalpiya.app.index.presentation.todo_list
+package com.entalpiya.app.index.presentation.task_list
 
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.entalpiya.app.index.domain.model.Todo
-import com.entalpiya.app.index.domain.use_case.TodoUseCases
+import com.entalpiya.app.index.domain.model.Task
+import com.entalpiya.app.index.domain.use_case.TaskUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TodoListViewModel @Inject constructor(
-    private val useCases: TodoUseCases
+class TaskListViewModel @Inject constructor(
+    private val useCases: TaskUseCases
 ) : ViewModel() {
-    private val _state = mutableStateOf(TodoListState())
-    val state: State<TodoListState> = _state
+    private val _state = mutableStateOf(TaskListState())
+    val state: State<TaskListState> = _state
 
     init {
-        getAndSetAllTodos()
+        getAndSetAllTasks()
         getAndSetHasDeleteAction()
     }
 
@@ -27,31 +27,31 @@ class TodoListViewModel @Inject constructor(
         _state.value = _state.value.copy(hasDeleteAction = value)
     }
 
-    private fun getAndSetAllTodos() {
+    private fun getAndSetAllTasks() {
         viewModelScope.launch {
-            val todos = useCases.getAllTodos()
-            _state.value = _state.value.copy(todos = todos)
+            val todos = useCases.getAllTasks()
+            _state.value = _state.value.copy(tasks = todos)
         }
     }
 
-    fun handleToggleCompleteTodo(id: String, isComplete: Boolean) {
+    fun handleToggleCompleteTask(id: String, isComplete: Boolean) {
         viewModelScope.launch {
-            useCases.toggleCompleteTodo(id, isComplete)
-            getAndSetAllTodos()
+            useCases.toggleCompleteTask(id, isComplete)
+            getAndSetAllTasks()
         }
     }
 
-    fun handleDeleteTodo(id: String) {
+    fun handleDeleteTask(id: String) {
         viewModelScope.launch {
-            useCases.deleteTodo(id)
-            getAndSetAllTodos()
+            useCases.deleteTask(id)
+            getAndSetAllTasks()
         }
     }
 
-    fun restoreTodo(todo: Todo) {
+    fun restoreTask(task: Task) {
         viewModelScope.launch {
-            useCases.insertTodo(todo)
-            getAndSetAllTodos()
+            useCases.insertTask(task)
+            getAndSetAllTasks()
         }
     }
 
@@ -60,7 +60,7 @@ class TodoListViewModel @Inject constructor(
             val hasDeleteAction = useCases.getHasDeleteAction() == "true"
             setHasDeleteAction(hasDeleteAction)
             Log.d(
-                "TodoListViewModel",
+                "TaskListViewModel",
                 "getAndSetHasDeleteAction() hasDeleteAction is $hasDeleteAction"
             )
         }

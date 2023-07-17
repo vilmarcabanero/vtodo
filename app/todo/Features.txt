@@ -54,6 +54,8 @@ So that when I use more than one device, my data will be synced with all my devi
 if versionKeys are different, it means that the data was updated. Compare each item, if one exists remotely, insert it in local.
 If one exists locally, insert it in remote db.
 
+id, title, description, isComplete, createdAt, versionKey, userId
+
 TODO
 F4
 As a user, I want that my details be saved locally after I login, so that when I open the app even offline,
@@ -121,6 +123,24 @@ done TODO
 F14
 As a developer, I want the width of the DropdownMenu become 1/2 of the screen.
 
+TODO
+F15
+As a developer, I want to include userId for Todo_ model.
+- for newly installed app and which the user is not yet logged in, create a default userId for the user and store that in SharedPreferences with userId key.
+- when a user creates a task, the newly created task will have a userId field.
+- when user decided to register, the userId saved locally will be used as the id of the user data to be saved in the remote database.
+
+
+done TODO
+F16
+As a developer, I want to rename the Todo_ model to Task model. Also the other files such as classes.
+- to match the remote entity. also, para di na need maglagay ng _ like for example Todo_
+-
+
+TODO
+F17
+As a developer, I want to optimize the first load of the app
+- use R8, profiling etc.
 
 done TODO
 B1
@@ -131,3 +151,9 @@ done TODO
 B2
 When I click a complete todo_, then press check to save even if without editing, the isComplete status becomes false.
 - the correct behaviour should remain the isComplete status of the todo_.
+
+TODO
+B3
+If i.press ang delete, nag stay muna siya. nauna lumipat to todolist screen bago mawala.yung delete.
+programmatically hide the delete before moving to todolist.screen.
+
