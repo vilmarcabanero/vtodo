@@ -1,5 +1,6 @@
 package com.entalpiya.app.index.presentation.add_edit_task
 
+import android.view.View
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -93,8 +94,9 @@ fun AddEditTaskScreen(
         },
         floatingActionButton = {
             FloatingAction(
+                isEnabled = vm.state.value.addTaskSuccess ,
                 onClick = {
-                    handleAddEditTask(vm, task, navigator)
+                    handleAddEditTask(vm, task, navigator, view)
                 },
                 icon = Icons.Default.Check,
                 desc = "check"
@@ -120,8 +122,7 @@ fun AddEditTaskScreen(
                     .focusRequester(focusRequester),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(onDone = {
-                    hideSoftwareKeyboard(view)
-                    handleAddEditTask(vm, task, navigator)
+                    handleAddEditTask(vm, task, navigator, view)
                 })
                 )
 
@@ -137,16 +138,16 @@ fun AddEditTaskScreen(
                     .padding(10.dp),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(onDone = {
-                    hideSoftwareKeyboard(view)
-                    handleAddEditTask(vm, task, navigator)
+                    handleAddEditTask(vm, task, navigator, view)
                 })
             )
         }
     }
 }
 
-fun handleAddEditTask(vm: AddEditTaskViewModel, task: Task?, navigator: DestinationsNavigator) {
+fun handleAddEditTask(vm: AddEditTaskViewModel, task: Task?, navigator: DestinationsNavigator, view: View) {
     if (vm.state.value.addTaskSuccess) {
+        hideSoftwareKeyboard(view)
         vm.insertTask(
             Task(
                 id = task?.id ?: UUID.randomUUID().toString(),

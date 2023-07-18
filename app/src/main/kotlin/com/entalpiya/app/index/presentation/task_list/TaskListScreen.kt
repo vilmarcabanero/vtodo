@@ -52,6 +52,7 @@ fun TaskListScreen(
     Scaffold(
         floatingActionButton = {
             FloatingAction(
+                isEnabled = true,
                 onClick = {
                     navigator.navigate(AddEditTaskScreenDestination(null))
                 },

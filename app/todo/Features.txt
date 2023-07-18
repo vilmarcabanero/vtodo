@@ -143,6 +143,14 @@ As a developer, I want to optimize the first load of the app
 - use R8, profiling etc.
 
 done TODO
+F18
+If I press the return key, when title is empty, the keyboard should not be hidden.
+
+done TODO
+F19
+Disable the check icon when title is still empty or blank.
+
+done TODO
 B1
 When I delete a todo_, and undo it, snack bar will always appear everytime I go back to the TodoListScreen.
 - fixed using SharedPreferences

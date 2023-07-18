@@ -12,24 +12,27 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun FloatingAction(
+    isEnabled: Boolean,
     onClick: () -> Unit,
     icon: ImageVector,
     desc: String,
 ) {
-    FloatingActionButton(
-        onClick = {
-            onClick()
-        },
-        backgroundColor = MaterialTheme.colors.primary
-    ) {
-        Icon(imageVector = icon, contentDescription = desc)
-    }
+    if (isEnabled) {
+        FloatingActionButton(
+            onClick = {
+                onClick()
+            },
+            backgroundColor = MaterialTheme.colors.primary,
+        ) {
+            Icon(imageVector = icon, contentDescription = desc)
+        }
+    } else Icon(imageVector = icon, contentDescription = desc)
 }
 
 @Preview
 @Composable
 fun FloatingActionPreview() {
     Surface {
-        FloatingAction(onClick = {}, icon = Icons.Default.Add, desc = "add")
+        FloatingAction(onClick = {}, icon = Icons.Default.Add, desc = "add", isEnabled = true)
     }
 }
