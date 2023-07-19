@@ -113,7 +113,7 @@ As a developer, I want to make this app a Daily Tasks, in which the main list is
 - the current todos of the day is Active todos
 - similar to googles tasks "Completed (2)" where 2 is the number of completed todos, or in this app, the number of Inactive todos.
 
-TODO
+done TODO
 F13
 As a developer, I want the app to use BasicTextField instead of TextField
 - so that, we can avoid the default Material UI TextField that has border bottom

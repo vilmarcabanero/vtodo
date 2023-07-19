@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.entalpiya.app.core.presentation.components.FloatingAction
+import com.entalpiya.app.core.presentation.components.TransparentTextField
 import com.entalpiya.app.core.utils.hideSoftwareKeyboard
 import com.entalpiya.app.index.domain.model.Task
 import com.entalpiya.app.index.presentation.destinations.TaskListScreenDestination
@@ -94,7 +95,7 @@ fun AddEditTaskScreen(
         },
         floatingActionButton = {
             FloatingAction(
-                isEnabled = vm.state.value.addTaskSuccess ,
+                isEnabled = vm.state.value.addTaskSuccess,
                 onClick = {
                     handleAddEditTask(vm, task, navigator, view)
                 },
@@ -109,50 +110,70 @@ fun AddEditTaskScreen(
                 .fillMaxSize()
                 .padding(it)
         ) {
-            TextField(
-                value = vm.titleState.value,
-                onValueChange = { title -> vm.setTitle(title) },
-                placeholder = { Text(text = "Title") },
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = MaterialTheme.colors.background
-                ),
+            TransparentTextField(
+                text = vm.titleState.value.text,
+                hint = "Title",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp)
                     .focusRequester(focusRequester),
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                keyboardActions = KeyboardActions(onDone = {
-                    handleAddEditTask(vm, task, navigator, view)
-                })
-                )
-
-            TextField(
-                value = vm.descriptionState.value,
-                onValueChange = { desc -> vm.setDescription(desc) },
-                placeholder = { Text(text = "Description (optional)") },
-                colors = TextFieldDefaults.textFieldColors(
-                    backgroundColor = MaterialTheme.colors.background
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp),
+                isHintVisible = vm.titleState.value.isHintVisible,
+                onValueChange = { title -> vm.setTitle(title) },
+                textStyle = MaterialTheme.typography.h6.copy(color = MaterialTheme.colors.onBackground),
+                singleLine = true,
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 keyboardActions = KeyboardActions(onDone = {
                     handleAddEditTask(vm, task, navigator, view)
                 })
             )
+            TransparentTextField(
+                text = vm.descriptionState.value.text,
+                hint = "Description (optional)",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp),
+                isHintVisible = vm.descriptionState.value.isHintVisible,
+                onValueChange = { desc -> vm.setDescription(desc) },
+                textStyle = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onBackground),
+                singleLine = false,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(onDone = {
+                    handleAddEditTask(vm, task, navigator, view)
+                })
+            )
+
+//            TextField(
+//                value = vm.descriptionState.value.text,
+//                onValueChange = { desc -> vm.setDescription(desc) },
+//                placeholder = { Text(text = "Description (optional)") },
+//                colors = TextFieldDefaults.textFieldColors(
+//                    backgroundColor = MaterialTheme.colors.background
+//                ),
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(10.dp),
+//                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+//                keyboardActions = KeyboardActions(onDone = {
+//                    handleAddEditTask(vm, task, navigator, view)
+//                })
+//            )
         }
     }
 }
 
-fun handleAddEditTask(vm: AddEditTaskViewModel, task: Task?, navigator: DestinationsNavigator, view: View) {
+fun handleAddEditTask(
+    vm: AddEditTaskViewModel,
+    task: Task?,
+    navigator: DestinationsNavigator,
+    view: View
+) {
     if (vm.state.value.addTaskSuccess) {
         hideSoftwareKeyboard(view)
         vm.insertTask(
             Task(
                 id = task?.id ?: UUID.randomUUID().toString(),
-                title = vm.titleState.value,
-                description = vm.descriptionState.value,
+                title = vm.titleState.value.text,
+                description = vm.descriptionState.value.text,
                 isComplete = task?.isComplete ?: false,
                 createdAt = task?.createdAt ?: System.currentTimeMillis(),
             )

@@ -1,7 +1,9 @@
 package com.entalpiya.app.index.presentation.add_edit_task
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.focus.FocusState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.entalpiya.app.index.domain.model.Task
@@ -18,21 +20,23 @@ class AddEditTaskViewModel @Inject constructor(
     private val _state = mutableStateOf(AddEditTaskState())
     val state: State<AddEditTaskState> = _state
 
+    private val _titleState = mutableStateOf(TextFieldState())
+    val titleState: State<TextFieldState> = _titleState
+    
 
-    private val _titleState = mutableStateOf("")
-    val titleState: State<String> = _titleState
-
-    private val _descriptionState = mutableStateOf("")
-    val descriptionState: State<String> = _descriptionState
+    private val _descriptionState = mutableStateOf(TextFieldState())
+    val descriptionState: State<TextFieldState> = _descriptionState
 
 
     fun setTitle(value: String) {
-        _titleState.value = value
+        _titleState.value = _titleState.value.copy(text = value)
         _state.value = _state.value.copy(addTaskSuccess = value.isNotBlank())
+        setTitleHintVisibility()
     }
 
     fun setDescription(value: String) {
-        _descriptionState.value = value
+        _descriptionState.value = _descriptionState.value.copy(text = value)
+        setDescriptionHintVisibility()
     }
 
     fun setHasDeleteAction(value: Boolean) {
@@ -45,6 +49,17 @@ class AddEditTaskViewModel @Inject constructor(
 
     fun setClosePopup() {
         _state.value = _state.value.copy(isPopUpOpen = false)
+    }
+
+    private fun setTitleHintVisibility() {
+        _titleState.value = _titleState.value.copy(
+            isHintVisible = _titleState.value.text.isBlank()
+        )
+    }
+    private fun setDescriptionHintVisibility() {
+        _descriptionState.value = _descriptionState.value.copy(
+            isHintVisible = _descriptionState.value.text.isBlank()
+        )
     }
 
     fun insertTask(task: Task) {
