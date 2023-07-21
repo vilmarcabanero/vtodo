@@ -172,6 +172,7 @@ fun handleAddEditTask(
         vm.insertTask(
             Task(
                 id = task?.id ?: UUID.randomUUID().toString(),
+                userId = vm.state.value.userId,
                 title = vm.titleState.value.text,
                 description = vm.descriptionState.value.text,
                 isComplete = task?.isComplete ?: false,

@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.focus.FocusState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.entalpiya.app.auth.domain.use_case.AuthUseCases
 import com.entalpiya.app.index.domain.model.Task
 import com.entalpiya.app.index.domain.use_case.TaskUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddEditTaskViewModel @Inject constructor(
-    private val useCases: TaskUseCases
+    private val useCases: TaskUseCases,
+    private val authUseCases: AuthUseCases,
 ) : ViewModel() {
 
     private val _state = mutableStateOf(AddEditTaskState())
@@ -27,6 +29,9 @@ class AddEditTaskViewModel @Inject constructor(
     private val _descriptionState = mutableStateOf(TextFieldState())
     val descriptionState: State<TextFieldState> = _descriptionState
 
+    init {
+        getAndSetUser()
+    }
 
     fun setTitle(value: String) {
         _titleState.value = _titleState.value.copy(text = value)
@@ -71,6 +76,15 @@ class AddEditTaskViewModel @Inject constructor(
     fun saveHasDeleteAction() {
         viewModelScope.launch {
             useCases.saveHasDeleteAction()
+        }
+    }
+
+    private fun getAndSetUser() {
+        viewModelScope.launch {
+            val savedUserId = authUseCases.getUserId()
+            if (savedUserId != null) {
+                _state.value = _state.value.copy( userId = savedUserId )
+            }
         }
     }
 }

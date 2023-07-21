@@ -73,10 +73,7 @@ fun TaskListScreen(
             ) {
                 items(vm.state.value.tasks) { task ->
                     TaskItem(
-                        id = task.id,
-                        title = task.title,
-                        description = task.description,
-                        isComplete = task.isComplete,
+                        task = task,
                         handleToggleIsComplete = {
                             vm.handleToggleCompleteTask(
                                 task.id,

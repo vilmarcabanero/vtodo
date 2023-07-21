@@ -40,14 +40,14 @@ object TaskModule {
     @Singleton
     fun provideTaskUseCases(repository: TaskRepository): TaskUseCases {
         return TaskUseCases(
-            GetAllTasks(repository),
-            InsertTask(repository),
-            DeleteTask(repository),
-            ToggleCompleteTask(repository),
-            GetTask(repository),
-            GetHasDeleteAction(repository),
-            SaveHasDeleteAction(repository),
-            DeleteHasDeleteAction(repository)
+            getAllTasks = GetAllTasks(repository),
+            insertTask = InsertTask(repository),
+            deleteTask = DeleteTask(repository),
+            toggleCompleteTask =  ToggleCompleteTask(repository),
+            getTask = GetTask(repository),
+            getHasDeleteAction = GetHasDeleteAction(repository),
+            saveHasDeleteAction = SaveHasDeleteAction(repository),
+            deleteHasDeleteAction = DeleteHasDeleteAction(repository)
         )
     }
 }

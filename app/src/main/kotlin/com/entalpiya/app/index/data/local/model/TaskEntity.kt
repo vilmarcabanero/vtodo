@@ -8,10 +8,11 @@ import com.entalpiya.app.index.domain.model.Task
 data class TaskEntity(
     @PrimaryKey
     val id: String,
+    val userId: String,
     val title: String,
     val description: String?,
     val isComplete: Boolean,
     val createdAt: Long,
 ) {
-    fun toTask() = Task(id, title, description, isComplete, createdAt)
+    fun toTask() = Task(id, userId, title, description, isComplete, createdAt)
 }
