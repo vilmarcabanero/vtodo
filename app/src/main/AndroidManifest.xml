@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashScreenTheme"
-        tools:targetApi="33">
+        tools:targetApi="33"
+        android:usesCleartextTraffic="true"
+        >
+        <!--        android:usesCleartextTraffic="true" added this to use http in api endpoint-->
         <activity
             android:name=".core.presentation.MainActivity"
             android:exported="true"

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">vTodo</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="error_couldnt_reach_server">\"Couldn\'t reach server. It could be an issue on our end.\"</string>
+    <string name="oops_something_went_wrong">\"Something went wrong. Please try again.\"</string>
 </resources>

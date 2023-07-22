@@ -143,6 +143,8 @@ If one exists locally, insert it in remote db.
 
 id, title, description, isComplete, createdAt, versionKey, userId
 
+Currently working on F3, done creating login repository - 072223
+
 TODO
 F4
 As a user, I want that my details be saved locally after I login, so that when I open the app even offline,

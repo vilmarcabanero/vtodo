@@ -5,4 +5,5 @@ data class AuthUseCases(
     val getUserId: GetUserId,
     val saveUserCreatedAt: SaveUserCreatedAt,
     val getUserCreatedAt: GetUserCreatedAt,
+    val login: Login,
 )

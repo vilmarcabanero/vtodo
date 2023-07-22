@@ -31,6 +31,7 @@ class AddEditTaskViewModel @Inject constructor(
 
     init {
         getAndSetUser()
+        handleLogin()
     }
 
     fun setTitle(value: String) {
@@ -85,6 +86,14 @@ class AddEditTaskViewModel @Inject constructor(
             if (savedUserId != null) {
                 _state.value = _state.value.copy( userId = savedUserId )
             }
+        }
+    }
+
+    private fun handleLogin() {
+        val email = "anyacabanero1@gmail.com"
+        val password = "124124124"
+        viewModelScope.launch {
+            authUseCases.login(email, password)
         }
     }
 }
