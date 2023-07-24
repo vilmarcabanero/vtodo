@@ -7,6 +7,7 @@ import androidx.compose.ui.focus.FocusState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.entalpiya.app.auth.domain.use_case.AuthUseCases
+import com.entalpiya.app.core.utils.Resource
 import com.entalpiya.app.index.domain.model.Task
 import com.entalpiya.app.index.domain.use_case.TaskUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -90,7 +91,7 @@ class AddEditTaskViewModel @Inject constructor(
     }
 
     private fun handleLogin() {
-        val email = "anyacabanero1@gmail.com"
+        val email = "anyacabanero@gmail.com"
         val password = "124124124"
         viewModelScope.launch {
             authUseCases.login(email, password)

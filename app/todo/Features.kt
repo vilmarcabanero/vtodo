@@ -144,6 +144,9 @@ If one exists locally, insert it in remote db.
 id, title, description, isComplete, createdAt, versionKey, userId
 
 Currently working on F3, done creating login repository - 072223
+F3a
+Create a basic login functionality, will catch the backend error through SnackBar. No front end validation muna.
+- after login, trigger a get user request, then proceed to F4, save the user details locally. to be done on jul 24 or 25 evening.
 
 TODO
 F4
@@ -151,6 +154,9 @@ As a user, I want that my details be saved locally after I login, so that when I
 my details e.g. first name, email, etc. is visible on the app.
 - save the user details in user table similar to user table in the backend.
 and retrieve the user details thru query SELECT * FROM user WHERE id = :id
+- create a new repository/use case. getUserDetails. as of 072323. backend change muna. done creating backend for getUser,
+returns id, firstName, lastName, email, userCreatedAt
+- F4a, 072423 front end change, create getUser api request, repository and use case: simulate the login, with hard coded details.
 
 TODO
 F11

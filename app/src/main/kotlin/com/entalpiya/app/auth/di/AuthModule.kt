@@ -8,6 +8,7 @@ import com.entalpiya.app.auth.data.repository.UserRepositoryImpl
 import com.entalpiya.app.auth.domain.repository.AuthRepository
 import com.entalpiya.app.auth.domain.repository.UserRepository
 import com.entalpiya.app.auth.domain.use_case.AuthUseCases
+import com.entalpiya.app.auth.domain.use_case.GetUser
 import com.entalpiya.app.auth.domain.use_case.GetUserCreatedAt
 import com.entalpiya.app.auth.domain.use_case.GetUserId
 import com.entalpiya.app.auth.domain.use_case.Login
@@ -39,8 +40,8 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(sharedPreferences: SharedPreferences): UserRepository {
-        return UserRepositoryImpl(sharedPreferences)
+    fun provideUserRepository(sharedPreferences: SharedPreferences, authApi: AuthApi): UserRepository {
+        return UserRepositoryImpl(sharedPreferences, authApi)
     }
 
     @Provides
@@ -58,6 +59,7 @@ object AuthModule {
             saveUserCreatedAt = SaveUserCreatedAt(userRepository),
             getUserCreatedAt = GetUserCreatedAt(userRepository),
             login = Login(authRepository),
+            getUser = GetUser(userRepository),
         )
     }
 }

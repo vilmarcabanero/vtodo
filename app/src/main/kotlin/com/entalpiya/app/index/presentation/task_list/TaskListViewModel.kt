@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.entalpiya.app.auth.domain.use_case.AuthUseCases
+import com.entalpiya.app.core.utils.Resource
 import com.entalpiya.app.core.utils.toISOString
 import com.entalpiya.app.index.domain.model.Task
 import com.entalpiya.app.index.domain.use_case.TaskUseCases
@@ -27,6 +28,7 @@ class TaskListViewModel @Inject constructor(
         getAndSetAllTasks()
         getAndSetHasDeleteAction()
         getAndSetUser()
+        handleGetUser()
     }
 
     private fun setHasDeleteAction(value: Boolean) {
@@ -87,6 +89,17 @@ class TaskListViewModel @Inject constructor(
                 val userCreatedAt = toISOString(Date())
                 authUseCases.saveUserId(userId)
                 authUseCases.saveUserCreatedAt(userCreatedAt)
+            }
+        }
+    }
+
+    private fun handleGetUser() {
+        viewModelScope.launch {
+            val result = authUseCases.getUser()
+            when(result) {
+                is Resource.Success -> result.data?.let { Log.d("AddEditTaskViewModel", it.firstName) }
+                is Resource.Error -> {}
+                is Resource.NullError -> {}
             }
         }
     }
