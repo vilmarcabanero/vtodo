@@ -2,8 +2,8 @@ package com.entalpiya.app.core.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.entalpiya.app.index.data.local.model.TaskEntity
-import com.entalpiya.app.index.data.local.TaskDao
+import com.entalpiya.app.feature_home.data.local.model.TaskEntity
+import com.entalpiya.app.feature_home.data.local.TaskDao
 
 @Database(
     entities = [TaskEntity::class],

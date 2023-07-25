@@ -154,6 +154,7 @@ As a user, I want that my details be saved locally after I login, so that when I
 my details e.g. first name, email, etc. is visible on the app.
 - save the user details in user table similar to user table in the backend.
 and retrieve the user details thru query SELECT * FROM user WHERE id = :id
+    - check if better store nalang yung user object as json? gamit nalang shared preferences.
 - create a new repository/use case. getUserDetails. as of 072323. backend change muna. done creating backend for getUser,
 returns id, firstName, lastName, email, userCreatedAt
 - F4a, 072423 front end change, create getUser api request, repository and use case: simulate the login, with hard coded details.
