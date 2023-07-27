@@ -38,10 +38,10 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField 'String', 'WEB_BASE_URL', webBaseUrlStaging
+            buildConfigField 'String', 'API_BASE_URL', apiBaseUrlStaging
         }
         release {
-            buildConfigField 'String', 'WEB_BASE_URL', webBaseUrlProd
+            buildConfigField 'String', 'API_BASE_URL', apiBaseUrlProd
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"

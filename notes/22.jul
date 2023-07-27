@@ -1,0 +1,30 @@
+What could be a more specific error after IOException for an HTTP Request? Aside from going directly to e: Exception
+
+override suspend fun makeHttpRequest(): SimpleResource {
+    return try {
+        // Perform the HTTP request here
+        api.makeHttpRequest()
+        Resource.Success(Unit)
+    } catch (e: IOException) {
+        // Handle I/O-related errors
+        if (e is SocketTimeoutException) {
+            Resource.Error(
+                uiText = UiText.StringResource(R.string.error_connection_timeout)
+            )
+        } else if (e is ConnectException) {
+            Resource.Error(
+                uiText = UiText.StringResource(R.string.error_couldnt_connect_server)
+            )
+        } else {
+            Resource.Error(
+                uiText = UiText.StringResource(R.string.error_io_exception_generic)
+            )
+        }
+    } catch (e: HttpException) {
+        // Handle HTTP-related errors
+        Resource.Error(
+            uiText = UiText.StringResource(R.string.oops_something_went_wrong)
+        )
+    }
+}
+
