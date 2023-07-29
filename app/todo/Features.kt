@@ -225,3 +225,4 @@ B3
 If i.press ang delete, nag stay muna siya. nauna lumipat to todolist screen bago mawala.yung delete.
 programmatically hide the delete before moving to todolist.screen.
 
+TODO B3 Crashed
